@@ -1,5 +1,5 @@
 <template>
-   <el-header style="text-align: right; font-size: 12px">
+   <el-header style="text-align: right; font-size: 12px" v-show="$route.name!=='Login'">
        <div class="layout-logo"><h2>废品交易系统</h2></div>
         <el-dropdown style="margin-right:25px;cursor: pointer;">
             <i class="el-icon-s-tools"><span style="margin-left:5px">设置</span></i>
@@ -14,7 +14,8 @@
         <el-dropdown style="cursor: pointer;">
             <i class="el-icon-user-solid"><span style="margin-left:5px">王小虎</span></i>
             <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item @click.native="loginOut">退出</el-dropdown-item>
+              <!-- <el-dropdown-item @click.native="loginOut">退出</el-dropdown-item> -->
+              <el-dropdown-item @click.native="loginOut" v-loading.fullscreen.lock="fullscreenLoading">退出</el-dropdown-item>
             </el-dropdown-menu>
         </el-dropdown>
     </el-header> 
@@ -30,7 +31,9 @@
 <script>
 export default {
   data() {
-    return {};
+    return {
+      fullscreenLoading:false
+    };
   },
 
   methods: {
@@ -45,7 +48,11 @@ export default {
     },
     loginOut() {
       // alert('000');
-       this.$router.push("/");
+      this.fullscreenLoading = true;
+        setTimeout(() => {
+          this.fullscreenLoading = false;
+          this.$router.push("/");
+        }, 2000);
     }
   }
 };

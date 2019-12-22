@@ -11,7 +11,7 @@
               <router-view></router-view>
             </el-main>
         </el-container>
-        <el-footer style="padding:20px;height:auto">Footer</el-footer>
+        <el-footer style="padding:20px;height:auto" v-show="$route.name!=='Login'">Footer</el-footer>
       </el-container>
     </el-container>
   </div>
